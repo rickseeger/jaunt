@@ -14,8 +14,8 @@ import subprocess
 from planetmirrors import mirrors
 
 logLevel = logging.DEBUG
+localPath = '/home/ubuntu/osm-planet.bz2'
 remotePath = '/user/ubuntu/osm-planet.bz2'
-
 
 FORMAT = '%(asctime)-15s %(message)s'
 logging.basicConfig(format=FORMAT)
@@ -27,8 +27,8 @@ def getRemoteURL(url):
     logger.info('downloading %s ...' % url)
     start = time.time()
     try: 
-        localFile = urlgrabber.urlgrab(url)
-        fileSize = os.path.getsize(localFile)
+        fileName = urlgrabber.urlgrab(url, localPath)
+        fileSize = os.path.getsize(fileName)
     except Exception, e:
         logger.warning('urlgrabber: %s' % e.strerror)
         return(None)
@@ -36,7 +36,7 @@ def getRemoteURL(url):
     logger.debug('rcvd: %d bytes' % fileSize)
     logger.debug('time: %d seconds' % elapsed)
     logger.debug('speed: %d MB/s' % round((fileSize/1048576)/elapsed))
-    return(localFile)
+    return(fileName)
 
 
 def HDFSPut(localPath, remotePath):
