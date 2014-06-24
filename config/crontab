@@ -1,2 +1,2 @@
 # OSM planet files are updated weekly
-0 21 * * 4 /usr/bin/python -u /usr/local/osm-places/scripts/fetcher.py >> /var/log/fetcher.log
+0 21 * * 4 /usr/bin/unbuffer /usr/bin/python -u /home/ubuntu/osm-places/scripts/fetcher.py >> /home/ubuntu/log/fetcher.log
