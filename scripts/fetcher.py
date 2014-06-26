@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 #
 # planet-fetcher.py
 # Pulls down a copy of the Open Street Map database and copies it to
@@ -24,7 +26,7 @@ logger.setLevel(logLevel)
 
 
 def getRemoteURL(url):
-    logger.info('downloading %s ...' % url)
+    logger.info('downloading %s' % url)
     start = time.time()
     try: 
         fileName = urlgrabber.urlgrab(url, localPath)
@@ -80,4 +82,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
