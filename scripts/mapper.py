@@ -2,25 +2,23 @@
 import sys
 import cStringIO
 import re
+import math
 
+# size of smallest rectangle as 1000 x degrees; 10 = 0.69 miles
+baseSize = 10
 
-# smallest square as (degrees * 10^3); 10 == 0.69 miles 
-baseResolution = 10
-
-# each level is twice the width of the previous
+# number of bounding box sizes, each level is double the width of previous 
 numLevels = 6
 
 # OSM tag key/value pattern
 kvPattern = re.compile('k="([^"]+)"\sv="([^"]+)"')
 
-# OSM lat/long pattern
+# OSM lat/lon pattern
 llPattern = re.compile('lat="([^"]+)"\slon="([^"]+)"')
-
-# only keep these keys
 keyFilter = [ 'name', 'amenity' ]
 
 
-# return list of k/v pairs found
+# return dict of k/v pairs found in tags
 def process(val):
     dict = {}
     for line in val.splitlines():
@@ -51,8 +49,11 @@ def main():
             else:
                 match = llPattern.search(line)
                 if ((match != None) and (match.lastindex == 2)):
-                    lat = match.group(1)
-                    lon = match.group(2)
+                    try:
+                        lat = float(match.group(1))
+                        lon = float(match.group(2))
+                    except ValueError:
+                        continue
                     intext = True
                     buff = cStringIO.StringIO()
 
@@ -64,11 +65,25 @@ def main():
                 buff.close()
                 buff = None
                 dict = process(val)
-                if (len(dict) > 0):
+
+                amenity = dict.get('amenity')
+                name = dict.get('name')
+
+                if ((amenity != None) & (name != None)):
                     
-                    # for each rectangle size emit
-                    # key: upper-left corner of rect and rect height in 10^3 degrees as (lat|lon|range)
-                    # value: tuple (name, amenity, lat, lon)
+                    # emit kv for each rectangle size
+                    for level in range(numLevels):
+
+                        # key: lat,lon of upper left bbox + bbox size + amenity type
+                        rectSize = math.pow(2,level) * baseSize
+                        gridStep = float(1000/rectSize)
+                        cornerLat = (math.floor(lat*gridStep)/gridStep) * 100.0
+                        cornerLon = ((math.floor(lon*gridStep)/gridStep) + 180.0) * 100.0
+                        key = '%.0f:%.0f:%04d:%s' % (cornerLat, cornerLon, rectSize, amenity)
+
+                        # value: tuple (name, lat, lon)
+                        value = lat, lon, name
+                        print '%s\t%s' % (key, value)
 
         # node middle
         else:
