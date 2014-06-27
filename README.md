@@ -1,4 +1,5 @@
-# OSM-Places
+# Jaunt
 
-## HBase implementation of the Open Street Maps database
+## Pipeline for importing and serving Open Street Maps amenities using HBase.
+
 
