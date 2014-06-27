@@ -1,0 +1,4 @@
+disable 'osm'
+drop 'osm'
+create 'osm', 'p'
+

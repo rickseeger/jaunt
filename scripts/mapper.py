@@ -3,18 +3,16 @@ import sys
 import cStringIO
 import re
 import math
-
-# size of smallest rectangle as 1000 x degrees; 10 = 0.69 miles
-baseSize = 10
-
-# number of bounding box sizes, each level is double the width of previous 
-numLevels = 6
+from config import baseSize
+from config import numLevels
 
 # OSM tag key/value pattern
 kvPattern = re.compile('k="([^"]+)"\sv="([^"]+)"')
 
 # OSM lat/lon pattern
 llPattern = re.compile('lat="([^"]+)"\slon="([^"]+)"')
+
+# tags to look for
 keyFilter = [ 'name', 'amenity' ]
 
 

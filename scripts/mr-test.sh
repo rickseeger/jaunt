@@ -1,2 +1,2 @@
-# test map-reduce scripts
+# test mapreduce scripts
 bzcat ../data/pacifica.xml.bz2 | ./mapper.py | sort | ./reducer.py > part-00000
