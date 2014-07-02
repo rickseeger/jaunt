@@ -1,6 +1,6 @@
 # Jaunt
 
-## Data pipeline and RESTful API for retrieving nearby amenities
+## API for retrieving nearby amenities
 
 ![alt text](images/pipeline.png "Jaunt Pipeline")
 
@@ -15,7 +15,7 @@ to find all nearby locations of a specific type.
 
 ## Map tiling scheme
 
-![alt text](images/pipeline.png "Jaunt Map Tiling")
+![alt text](images/tiles.png "Jaunt Map Tiling")
 
 The Earth is divided into tiles at 6 different resolutions. These are 
 fixed, non-overlapping tiles ranging in size from 0.01 degrees to 0.32
@@ -36,7 +36,7 @@ only the first 20, and inserts these into HBase.
 
 ### Additional software on master node
 
-> `$ sudo apt-get install python-pip expect-dev`
+> `$ sudo apt-get install python-pip expect-dev`  
 > `$ sudo pip install starbase flask urllib2`
 
 ## Scripts
