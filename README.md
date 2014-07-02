@@ -13,8 +13,6 @@ data into HBase through the REST API.
 A Flask API serves API requests, pulling records from HBase as necessary
 to find all nearby locations of a specific type.
 
-## Map tiling scheme
-
 ![alt text](images/tiles.png "Jaunt Map Tiling")
 
 The Earth is divided into tiles at 6 different resolutions. These are 
