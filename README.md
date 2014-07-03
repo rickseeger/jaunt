@@ -1,6 +1,6 @@
 # Jaunt
 
-## API for retrieving nearby amenities
+## Find places, fast!
 
 ![alt text](images/pipeline.png "Jaunt Pipeline")
 
