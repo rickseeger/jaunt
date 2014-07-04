@@ -8,6 +8,9 @@ APIURL = 'http://jaunt.seeger.net:5000/v1/find'
 DemoHost = '172.31.11.68'
 DemoPort = 80
 
+localOSMPath = '/home/ubuntu/osm-planet.bz2'
+remoteOSMPath = '/user/ubuntu/osm-planet.bz2'
+
 # size of smallest rectangle as 1000 x degrees; 10 = 0.69 miles
 baseSize = 10
 

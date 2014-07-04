@@ -16,8 +16,6 @@ import subprocess
 from planetmirrors import mirrors
 
 logLevel = logging.DEBUG
-localPath = '/home/ubuntu/osm-planet.bz2'
-remotePath = '/user/ubuntu/osm-planet.bz2'
 
 FORMAT = '%(asctime)-15s %(message)s'
 logging.basicConfig(format=FORMAT)
@@ -29,7 +27,7 @@ def getRemoteURL(url):
     logger.info('downloading %s' % url)
     start = time.time()
     try: 
-        fileName = urlgrabber.urlgrab(url, localPath)
+        fileName = urlgrabber.urlgrab(url, config.localOSMPath)
         fileSize = os.path.getsize(fileName)
     except Exception, e:
         logger.warning('urlgrabber: %s' % e.strerror)
@@ -73,7 +71,7 @@ def main():
         logger.error('failed to download OSM file, giving up')
         return(1)
         
-    if (HDFSPut(planetFile, remotePath) == None):
+    if (HDFSPut(planetFile, config.remoteOSMPath) == None):
         logger.error('failed to put file to HDFS, exiting')
         return(1)
 
