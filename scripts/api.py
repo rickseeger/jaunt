@@ -1,5 +1,5 @@
 #!/usr/bin/python
-from flask import abort, Flask, json, jsonify, request, make_response
+from flask import abort, Flask, json, request, make_response
 from starbase import Connection
 from jsonschema import validate, ValidationError
 import jauntlib
@@ -48,14 +48,18 @@ def findPlaces():
 
         try:
             dict = t.fetch(key)
+            print "KEY", key
             response = json.dumps(dict)
-            return response
+            if (response == 'null'):
+                abort(make_response('{ "error" : "Non-existent HBase key ' + key + '" }', 400))
         except:
             abort(make_response('{ "error" : "HBase get failed" }', 404))
-    
+
+        return response
+
     else:
         abort(make_response('{ "error" : "Unknown Content-Type" }', 400))
 
 
 if __name__ == '__main__':
-    app.run(host=config.APIHost, port=config.APIPort, debug = True)
+    app.run(host=config.APIHost, port=config.APIPort, debug=True)

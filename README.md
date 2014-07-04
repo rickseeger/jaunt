@@ -35,9 +35,10 @@ only the first 20, and inserts these into HBase.
 ### Additional software on master node
 
 > `$ sudo apt-get install python-pip expect-dev`  
-> `$ sudo pip install starbase flask urllib2`
+> `$ sudo pip install starbase flask urllib2 jsonschema`
 
 ## Scripts
 
 * fetcher.py should be scheduled to run in cron weekly
-* Launch API with `python api-svr.py >> /var/log/jaunt-api.log`
+* Launch API  on port 5000 with `$ nohup python api.py >> /var/log/jaunt-api.log &`
+* Launch Demo as root on port 80  with `# nohup python demo.py >> /var/log/jaunt-demo.log &`

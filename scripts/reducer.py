@@ -2,15 +2,14 @@
 
 import sys
 from starbase import Connection
-#from config import hbaseIP
+from config import hbaseIP
 from config import hbasePort
-
-maxPlacesPerRect = 20
+from config import maxPlacesPerTile
 
 hbaseIP = '172.31.11.68'
 hbasePort = 8080
-c = Connection(hbaseIP, hbasePort)
-t = c.table('osm')
+#c = Connection(hbaseIP, hbasePort)
+#t = c.table('osm')
 
 
 def emitPlaces(k, p):
@@ -24,7 +23,8 @@ def emitPlaces(k, p):
         dv = p[placeNum]
         vals[dk] = dv
     if (vals != None):
-        t.insert(k, {'p':vals})
+        pass
+        #t.insert(k, {'p':vals})
     
 
 def main():
@@ -41,7 +41,7 @@ def main():
             emitPlaces(lastKey, places)
             places = []
             
-        if (len(places) < maxPlacesPerRect):
+        if (len(places) < maxPlacesPerTile):
             places.append(place)
                 
         lastKey = key

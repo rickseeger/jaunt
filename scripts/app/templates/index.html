@@ -1,0 +1,76 @@
+{% extends "layout/base.html" %}
+
+{% block head %}
+  <style>
+    body {
+      overflow-y: auto;
+    }
+    #top {
+      margin-top: 60px;
+    }
+  </style>
+{% endblock %}
+
+
+{% block content %}
+<form name=place action=http://jaunt.seeger.net method=get>
+<table cellspacing=10>
+<tr>
+
+<td>
+<input id="info" type="image" width=500 src="/static/images/silicon-valley.png"><p>
+</td>
+
+<td valign=top>
+
+<table>
+
+<tr><td width=60 valign=top>Range</td>
+<td width=60 valign=top>
+<select name=range>
+<option value=1>1200 yards</option>
+<option value=2>1.4 miles</option>
+<option value=3>2.8 mile</option>
+<option value=4 SELECTED>5 miles</option>
+<option value=5>10 miles</option>
+<option value=5>20 miles</option>
+</select></td>
+</tr>
+
+<tr><td valign=top>Amenity</td>
+<td valign=top>
+<select name=amenity>
+<option value='bank'>Bank</option>
+<option value='bar'>Bar</option>
+<option value='cafe'>Cafe</option>
+<option value='fast_food'>Fast food</option>
+<option value='fuel'>Fuel</option>
+<option value='hospital'>Hospital</option>
+<option value='library'>Library</option>
+<option value='parking'>Parking</option>
+<option value='pharmacy'>Pharmacy</option>
+<option value='place_of_worship'>Church</option>
+<option value='police'>Police station</option>
+<option value='post_office'>Post office</option>
+<option value='pub'>Pub</option>
+<option value='restaurant' SELECTED>Restaurant</option>
+<option value='toilets'>Toilets</option>
+</select></td>
+</tr>
+</table><p>
+
+<pre>
+
+{% if (request.args): %}
+{{ places(request.args) }}
+{% endif %}
+
+</pre>
+
+</td>
+</tr>
+</table>
+</form>
+
+
+{% endblock %}
